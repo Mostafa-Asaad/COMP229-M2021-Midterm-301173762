@@ -29,21 +29,21 @@ router.get('/', (req, res, next) =>
 router.get('/add', (req, res, next) => {
 
     // show the details view
-    res.render('books/details', { title: 'Add', page: 'add', books: ''});
+    res.render('books/details', { title: 'Add', page: 'add', book: ''});
 
 });
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
 
-    // instantiate a new book
+    // instantiate a new Contact
   let newBook = new books
   ({
-    "Title": req.body.title,
-    "Description": req.body.description,
-    "Price": req.body.price,
-    "Author": req.body.author,
-    "Genre": req.body.genre
+    "Title": req.body.Title,
+    "Description": req.body.Description,
+    "Price": req.body.Price,
+    "Author": req.body.Author,
+    "Genre": req.body.Genre
   });
 
   // db.contact.insert({contact data is here...})
@@ -55,7 +55,7 @@ router.post('/add', (req, res, next) => {
       res.end(err);
     }
 
-    res.redirect('/books');
+    res.redirect('/details');
   });
 
 });

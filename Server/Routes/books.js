@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
         }
         else {
             res.render('books/index', {
-                title: 'books',
+                title: 'Books',
                 page: 'books',
                 books: books
             });
@@ -22,15 +22,15 @@ router.get('/', (req, res, next) => {
     });
 });
 router.get('/add', (req, res, next) => {
-    res.render('books/details', { title: 'Add', page: 'add', book: '' });
+    res.render('books/details', { title: 'Add', page: 'add', books: '' });
 });
 router.post('/add', (req, res, next) => {
     let newBook = new books_1.default({
-        "Title": req.body.Title,
-        "Author": req.body.Author,
-        "Description": req.body.Description,
-        "Genre": req.body.Genre,
-        "Price": req.body.Price
+        "Title": req.body.title,
+        "Description": req.body.description,
+        "Price": req.body.price,
+        "Author": req.body.author,
+        "Genre": req.body.genre
     });
     books_1.default.create(newBook, (err) => {
         if (err) {
@@ -41,41 +41,9 @@ router.post('/add', (req, res, next) => {
     });
 });
 router.get('/:id', (req, res, next) => {
-    let id = req.params.id;
-    books_1.default.findById(id, {}, {}, (err, bookItemToEdit) => {
-        if (err) {
-            console.error(err);
-            res.end(err);
-        }
-        res.render('index', { title: 'Edit', page: 'edit', book: bookItemToEdit });
-    });
 });
 router.post('/:id', (req, res, next) => {
-    let id = req.params.id;
-    let updatedBookItem = new books_1.default({
-        "_id": id,
-        "Title": req.body.Title,
-        "Author": req.body.Author,
-        "Description": req.body.Description,
-        "Genre": req.body.Genre,
-        "Price": req.body.Price
-    });
-    books_1.default.updateOne({ _id: id }, updatedBookItem, {}, (err) => {
-        if (err) {
-            console.error(err);
-            res.end(err);
-        }
-        res.redirect('/books');
-    });
 });
 router.get('/delete/:id', (req, res, next) => {
-    let id = req.params.id;
-    books_1.default.remove({ _id: id }, (err) => {
-        if (err) {
-            console.error(err);
-            res.end(err);
-        }
-        res.redirect('/books');
-    });
 });
 //# sourceMappingURL=books.js.map

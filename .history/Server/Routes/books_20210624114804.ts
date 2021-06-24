@@ -16,7 +16,7 @@ router.get('/', (req, res, next) =>
     }
     else {
       res.render('books/index', {
-        title: 'Books',
+        title: 'books',
         page: 'books',
         books: books
       });
@@ -39,14 +39,14 @@ router.post('/add', (req, res, next) => {
     // instantiate a new book
   let newBook = new books
   ({
-    "Title": req.body.title,
-    "Description": req.body.description,
-    "Price": req.body.price,
-    "Author": req.body.author,
-    "Genre": req.body.genre
+    "Title": req.body.Title,
+    "Author": req.body.Author,
+    "Description": req.body.Description,
+    "Genre": req.body.Genre,
+    "Price": req.body.Price
   });
 
-  // db.contact.insert({contact data is here...})
+  // db.book.insert({book data is here...})
 
   books.create(newBook, (err) => {
     if(err)
@@ -63,26 +63,67 @@ router.post('/add', (req, res, next) => {
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let id = req.params.id;
+
+  // pass the id to the db
+   books.findById(id, {}, {}, (err, bookItemToEdit) =>
+   {
+       if(err)
+       {
+           console.error(err);
+           res.end(err);
+       }
+
+       // show the edit view
+       res.render('index', {title:'Edit', page: 'edit', books: bookItemToEdit});
+   });
 });
 
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let id = req.params.id;
+
+  // instantiate a new book Item
+  let updatedBookItem = new books
+  ({
+    "_id": id,
+    "Title": req.body.Title,
+    "Author": req.body.Author,
+    "Description": req.body.Description,
+    "Genre": req.body.Genre,
+    "Price": req.body.Price
+    
+  });
+
+  // find the book item via db.book.update({"_id":id}) and then update
+  books.updateOne({_id: id}, updatedBookItem, {}, (err) =>{
+    if(err)
+    {
+      console.error(err);
+      res.end(err);
+    }
+
+    res.redirect('/books');
+  });
 
 });
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let id = req.params.id;
+
+  // db.contact.remove({"_id: id"})
+  books.remove({_id: id}, (err) => {
+    if(err)
+    {
+      console.error(err);
+      res.end(err);
+    }
+
+    res.redirect('/books');
+  });
 });
 
 
