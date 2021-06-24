@@ -37,30 +37,30 @@ router.get('/add', (req, res, next) => {
 router.post('/add', (req, res, next) => {
 
     // instantiate a new book
-  let newBook = new books
-  ({
-    "Title": req.body.title,
-    "Price": req.body.price,
-    "Author": req.body.author,
-    "Genre": req.body.genre
-  });
+  // let newBook = new books
+  // ({
+  //   "Title": req.body.title,
+  //   "Price": req.body.price,
+  //   "Author": req.body.author,
+  //   "Genre": req.body.genre
+  // });
 
-  // db.books.insert({book data is here...})
+  // // db.books.insert({book data is here...})
 
-  books.create(newBook, (err) => {
-    if(err)
-    {
-      console.error(err);
-      res.end(err);
-    }
+  // books.create(newBook, (err) => {
+  //   if(err)
+  //   {
+  //     console.error(err);
+  //     res.end(err);
+  //   }
 
-    res.redirect('/books');
-  });
+  //   res.redirect('/books');
+  // });
 
 });
 
 // GET the Book Details page in order to edit an existing Book
-router.get('/edit/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
 
   let id = req.params.id;
 
@@ -82,7 +82,7 @@ router.get('/edit/:id', (req, res, next) => {
 });
 
 // POST - process the information passed from the details form and update the document
-router.post('/edit/:id', (req, res, next) => {
+router.post('/:id', (req, res, next) => {
 
   let id = req.params.id;
 

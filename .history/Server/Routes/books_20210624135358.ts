@@ -11,16 +11,16 @@ router.get('/', (req, res, next) =>
 {
   // find all books in the books collection
   books.find( (err, books) => {
-    if (err) {
-      return console.error(err);
-    }
-    else {
+    //if (err) {
+    //  return console.error(err);
+   // }
+   // else {
       res.render('books/index', {
         title: 'Books',
         page: 'books',
         books: books
       });
-    }
+    //}
   });
 
 });
@@ -60,7 +60,7 @@ router.post('/add', (req, res, next) => {
 });
 
 // GET the Book Details page in order to edit an existing Book
-router.get('/edit/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
 
   let id = req.params.id;
 
@@ -82,7 +82,7 @@ router.get('/edit/:id', (req, res, next) => {
 });
 
 // POST - process the information passed from the details form and update the document
-router.post('/edit/:id', (req, res, next) => {
+router.post('/:id', (req, res, next) => {
 
   let id = req.params.id;
 

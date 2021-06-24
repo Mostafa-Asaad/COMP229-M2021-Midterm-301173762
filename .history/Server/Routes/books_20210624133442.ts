@@ -60,7 +60,7 @@ router.post('/add', (req, res, next) => {
 });
 
 // GET the Book Details page in order to edit an existing Book
-router.get('/edit/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
 
   let id = req.params.id;
 
@@ -77,12 +77,12 @@ router.get('/edit/:id', (req, res, next) => {
       }
 
       // show the edit view
-      res.render('books/details', { title: 'Edit', page: 'edit', books: bookItemToEdit});
+      res.render('index', { title: 'Edit', page: 'edit', books: bookItemToEdit});
   });
 });
 
 // POST - process the information passed from the details form and update the document
-router.post('/edit/:id', (req, res, next) => {
+router.post('/:id', (req, res, next) => {
 
   let id = req.params.id;
 

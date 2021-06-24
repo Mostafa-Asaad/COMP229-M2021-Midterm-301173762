@@ -39,7 +39,7 @@ router.post('/add', (req, res, next) => {
         res.redirect('/books');
     });
 });
-router.get('/:id', (req, res, next) => {
+router.get('/edit/:id', (req, res, next) => {
     let id = req.params.id;
     books_1.default.findById(id, {}, {}, (err, bookItemToEdit) => {
         if (err) {
@@ -49,7 +49,7 @@ router.get('/:id', (req, res, next) => {
         res.render('books/details', { title: 'Edit', page: 'edit', books: bookItemToEdit });
     });
 });
-router.post('/:id', (req, res, next) => {
+router.post('/edit/:id', (req, res, next) => {
     let id = req.params.id;
     let updatedBookItem = new books_1.default({
         "_id": id,
