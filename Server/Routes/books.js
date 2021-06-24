@@ -27,7 +27,6 @@ router.get('/add', (req, res, next) => {
 router.post('/add', (req, res, next) => {
     let newBook = new books_1.default({
         "Title": req.body.title,
-        "Description": req.body.description,
         "Price": req.body.price,
         "Author": req.body.author,
         "Genre": req.body.genre
@@ -41,9 +40,40 @@ router.post('/add', (req, res, next) => {
     });
 });
 router.get('/:id', (req, res, next) => {
+    let id = req.params.id;
+    books_1.default.findById(id, {}, {}, (err, bookItemToEdit) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.render('books/details', { title: 'Edit', page: 'edit', books: bookItemToEdit });
+    });
 });
 router.post('/:id', (req, res, next) => {
+    let id = req.params.id;
+    let updatedBookItem = new books_1.default({
+        "_id": id,
+        "Title": req.body.title,
+        "Price": req.body.price,
+        "Author": req.body.author,
+        "Genre": req.body.genre
+    });
+    books_1.default.updateOne({ _id: id }, updatedBookItem, {}, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect('/books');
+    });
 });
 router.get('/delete/:id', (req, res, next) => {
+    let id = req.params.id;
+    books_1.default.remove({ _id: id }, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect('/books');
+    });
 });
 //# sourceMappingURL=books.js.map
