@@ -36,27 +36,9 @@ router.get('/add', (req, res, next) => {
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
 
-    // instantiate a new book
-  let newBook = new book
-  ({
-    "Title": req.body.Title,
-    "Author": req.body.Author,
-    "Description": req.body.Description,
-    "Genre": req.body.Genre,
-    "Price": req.body.Price
-  });
-
-  // db.book.insert({book data is here...})
-
-  book.create(newBook, (err) => {
-    if(err)
-    {
-      console.error(err);
-      res.end(err);
-    }
-
-    res.redirect('/books');
-  });
+    /*****************
+     * ADD CODE HERE *
+     *****************/
 
 });
 

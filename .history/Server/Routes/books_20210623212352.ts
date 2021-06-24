@@ -4,13 +4,13 @@ const router = express.Router();
 export default router;
 
 // define the book model
-import book from '../Models/books';
+import Book from '../Models/books';
 
 /* GET books List page. READ */
 router.get('/', (req, res, next) => 
 {
   // find all books in the books collection
-  book.find( (err, books) => {
+  Book.find( (err, books) => {
     if (err) {
       return console.error(err);
     }
@@ -29,7 +29,7 @@ router.get('/', (req, res, next) =>
 router.get('/add', (req, res, next) => {
 
     // show the details view
-    res.render('books/details', { title: 'Add', page: 'add', book: ''});
+    res.render('books/details', { title: 'Add', page: 'add', Book: ''});
 
 });
 
@@ -37,7 +37,7 @@ router.get('/add', (req, res, next) => {
 router.post('/add', (req, res, next) => {
 
     // instantiate a new book
-  let newBook = new book
+  let newBook = new Book
   ({
     "Title": req.body.Title,
     "Author": req.body.Author,
@@ -48,7 +48,7 @@ router.post('/add', (req, res, next) => {
 
   // db.book.insert({book data is here...})
 
-  book.create(newBook, (err) => {
+  Book.create(newBook, (err) => {
     if(err)
     {
       console.error(err);

@@ -55,7 +55,7 @@ router.post('/add', (req, res, next) => {
       res.end(err);
     }
 
-    res.redirect('/books');
+    res.redirect('/contact-list');
   });
 
 });
