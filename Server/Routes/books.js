@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
         }
         else {
             res.render('books/index', {
-                title: 'Books',
+                title: 'books',
                 page: 'books',
                 books: books
             });
@@ -41,9 +41,41 @@ router.post('/add', (req, res, next) => {
     });
 });
 router.get('/:id', (req, res, next) => {
+    let id = req.params.id;
+    books_1.default.findById(id, {}, {}, (err, bookItemToEdit) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.render('index', { title: 'Edit', page: 'edit', book: bookItemToEdit });
+    });
 });
 router.post('/:id', (req, res, next) => {
+    let id = req.params.id;
+    let updatedBookItem = new books_1.default({
+        "_id": id,
+        "Title": req.body.Title,
+        "Author": req.body.Author,
+        "Description": req.body.Description,
+        "Genre": req.body.Genre,
+        "Price": req.body.Price
+    });
+    books_1.default.updateOne({ _id: id }, updatedBookItem, {}, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect('/books');
+    });
 });
 router.get('/delete/:id', (req, res, next) => {
+    let id = req.params.id;
+    books_1.default.remove({ _id: id }, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect('/books');
+    });
 });
 //# sourceMappingURL=books.js.map

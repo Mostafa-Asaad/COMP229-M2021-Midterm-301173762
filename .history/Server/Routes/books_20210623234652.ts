@@ -16,7 +16,7 @@ router.get('/', (req, res, next) =>
     }
     else {
       res.render('books/index', {
-        title: 'books',
+        title: 'Books',
         page: 'books',
         books: books
       });
@@ -88,11 +88,11 @@ router.post('/:id', (req, res, next) => {
   let updatedBookItem = new book
   ({
     "_id": id,
-    "Title": req.body.Title,
-    "Author": req.body.Author,
-    "Description": req.body.Description,
-    "Genre": req.body.Genre,
-    "Price": req.body.Price
+    "FirstName": req.body.FirstName,
+    "LastName": req.body.LastName,
+    "EmailAddress": req.body.EmailAddress,
+    "ContactNumber": req.body.ContactNumber,
+    "Company": req.body.Company
     
   });
 

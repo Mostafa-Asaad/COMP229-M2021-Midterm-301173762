@@ -16,7 +16,7 @@ router.get('/', (req, res, next) =>
     }
     else {
       res.render('books/index', {
-        title: 'books',
+        title: 'Books',
         page: 'books',
         books: books
       });
@@ -88,11 +88,11 @@ router.post('/:id', (req, res, next) => {
   let updatedBookItem = new book
   ({
     "_id": id,
-    "Title": req.body.Title,
-    "Author": req.body.Author,
-    "Description": req.body.Description,
-    "Genre": req.body.Genre,
-    "Price": req.body.Price
+    "FirstName": req.body.FirstName,
+    "LastName": req.body.LastName,
+    "EmailAddress": req.body.EmailAddress,
+    "ContactNumber": req.body.ContactNumber,
+    "Company": req.body.Company
     
   });
 
@@ -105,25 +105,15 @@ router.post('/:id', (req, res, next) => {
     }
 
     res.redirect('/books');
-  });
 
 });
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
 
-  let id = req.params.id;
-
-  // db.contact.remove({"_id: id"})
-  book.remove({_id: id}, (err) => {
-    if(err)
-    {
-      console.error(err);
-      res.end(err);
-    }
-
-    res.redirect('/books');
-  });
+    /*****************
+     * ADD CODE HERE *
+     *****************/
 });
 
 

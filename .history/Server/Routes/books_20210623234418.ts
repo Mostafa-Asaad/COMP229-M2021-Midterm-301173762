@@ -16,7 +16,7 @@ router.get('/', (req, res, next) =>
     }
     else {
       res.render('books/index', {
-        title: 'books',
+        title: 'Books',
         page: 'books',
         books: books
       });
@@ -82,48 +82,18 @@ router.get('/:id', (req, res, next) => {
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
 
-  let id = req.params.id;
-
-  // instantiate a new Contact Item
-  let updatedBookItem = new book
-  ({
-    "_id": id,
-    "Title": req.body.Title,
-    "Author": req.body.Author,
-    "Description": req.body.Description,
-    "Genre": req.body.Genre,
-    "Price": req.body.Price
-    
-  });
-
-  // find the clothing item via db.clothing.update({"_id":id}) and then update
-  book.updateOne({_id: id}, updatedBookItem, {}, (err) =>{
-    if(err)
-    {
-      console.error(err);
-      res.end(err);
-    }
-
-    res.redirect('/books');
-  });
+    /*****************
+     * ADD CODE HERE *
+     *****************/
 
 });
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
 
-  let id = req.params.id;
-
-  // db.contact.remove({"_id: id"})
-  book.remove({_id: id}, (err) => {
-    if(err)
-    {
-      console.error(err);
-      res.end(err);
-    }
-
-    res.redirect('/books');
-  });
+    /*****************
+     * ADD CODE HERE *
+     *****************/
 });
 
 
